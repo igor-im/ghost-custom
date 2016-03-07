@@ -74,6 +74,7 @@ function setResponseContext(req, res, data) {
         pageParam = req.params.page !== undefined ? parseInt(req.params.page, 10) : 1,
         tagPattern = new RegExp('^\\/' + config.routeKeywords.tag + '\\/'),
         blogPattern = new RegExp('^\\/blog\\/'),
+        projectsPattern = new RegExp('^\\/projects\\/'),
         authorPattern = new RegExp('^\\/' + config.routeKeywords.author + '\\/'),
         privatePattern = new RegExp('^\\/' + config.routeKeywords.private + '\\/'),
         indexPattern = new RegExp('^\\/' + config.routeKeywords.page + '\\/'),
@@ -92,6 +93,8 @@ function setResponseContext(req, res, data) {
     } else if (/^\/rss\//.test(res.locals.relativeUrl)) {
         contexts.push('rss');
     } else if (blogPattern.test(res.locals.relativeUrl)) {
+        contexts.push('blog');
+    } else if (projectsPattern.test(res.locals.relativeUrl)) {
         contexts.push('blog');
     } else if (privatePattern.test(res.locals.relativeUrl)) {
         contexts.push('private');
@@ -244,6 +247,11 @@ frontendControllers = {
         name: 'blog',
         route: '/blog/',
         firstPageTemplate: 'blog'
+    }),
+    projects: renderChannel({
+        name: 'projects',
+        route: '/projects/',
+        firstPageTemplate: 'projects'
     }),
     tag: renderChannel({
         name: 'tag',

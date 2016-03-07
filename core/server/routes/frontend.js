@@ -57,11 +57,13 @@ frontendRoutes = function frontendRoutes(middleware) {
     // Index
     indexRouter.route('/').get(frontend.homepage);
     indexRouter.route('/blog/').get(frontend.blog);
+    indexRouter.route('/projects/').get(frontend.projects);
     indexRouter.route('/' + routeKeywords.page + '/:page/').get(frontend.homepage);
     indexRouter.use(rssRouter);
 
     // Tags
     tagRouter.route('/').get(frontend.tag);
+    //tagRouter.route('/projects/').get(frontend.projects);
     tagRouter.route('/' + routeKeywords.page + '/:page/').get(frontend.tag);
     tagRouter.use(rssRouter);
 
